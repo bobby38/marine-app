@@ -1,64 +1,33 @@
 import React from 'react';
 import { MarineService } from '../types';
-import { RatingWidget } from './RatingWidget';
-import { BookNowButton } from './BookNowButton';
+import { useNavigate } from 'react-router-dom';
 
 interface ServiceCardProps {
   service: MarineService;
-  onBookNow: (serviceId: string) => void;
+  // Removed onBookNow prop as it's no longer used
 }
 
-export const ServiceCard: React.FC<ServiceCardProps> = ({ service, onBookNow }) => {
-  const isAvailable = service.availability.slots.length > 0;
+export const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
+  const navigate = useNavigate();
 
   return (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-      <div className="relative h-48 overflow-hidden">
-        <img
-          src={service.imageUrl}
-          alt={service.title}
-          className="w-full h-full object-cover"
-        />
-        {service.averageRating > 4.5 && (
-          <div className="absolute top-2 right-2 bg-[#1E3A8A] text-white px-2 py-1 rounded-md text-sm font-semibold">
-            Top Rated
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden transition-all hover:shadow-md">
+      <img src={service.image} alt={service.name} className="w-full h-48 object-cover" />
+      <div className="p-6">
+        <h3 className="text-xl font-semibold mb-2 dark:text-white">{service.name}</h3>
+        <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">{service.description}</p> {/* Added line-clamp */} 
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-lg font-bold dark:text-white">${service.price.toFixed(2)}</p> {/* Ensured 2 decimal places */}
+            <p className="text-sm text-gray-500 dark:text-gray-400">{service.duration}</p>
           </div>
-        )}
-      </div>
-
-      <div className="p-4">
-        <div className="flex justify-between items-start mb-2">
-          <h3 className="text-xl font-bold text-gray-900 line-clamp-2">
-            {service.title}
-          </h3>
-          <span className="text-lg font-bold text-[#1E3A8A]">
-            ${service.price}
-          </span>
+          <button
+            onClick={() => navigate(`/services/${service.id}`)}
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            View Details
+          </button>
         </div>
-
-        <p className="text-gray-600 mb-4 line-clamp-2">
-          {service.description}
-        </p>
-
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center space-x-2">
-            <RatingWidget rating={service.averageRating} size="sm" />
-            <span className="text-sm text-gray-600">
-              ({service.reviews.length} reviews)
-            </span>
-          </div>
-          {isAvailable && (
-            <span className="text-sm text-green-600">
-              Next available: {service.availability.nextAvailable}
-            </span>
-          )}
-        </div>
-
-        <BookNowButton
-          onClick={() => onBookNow(service.id)}
-          isAvailable={isAvailable}
-          className="w-full"
-        />
       </div>
     </div>
   );

@@ -1,198 +1,169 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from './context/ThemeContext';
+import Layout from './components/Layout';
+import HomePage from './pages/HomePage';
+import ServicesPage from './pages/ServicesPage';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
 import { MarineService } from './types';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import HeroSection from './components/HeroSection';
-import FeaturesSection from './components/FeaturesSection';
-import ServicesSection from './components/ServicesSection';
-import TestimonialsSection from './components/TestimonialsSection';
-import ContactSection from './components/ContactSection';
 
-// Sample data for demonstration
-const sampleServices: MarineService[] = [
-  {
-    id: '1',
-    title: 'Hull Cleaning Service',
-    description: 'Professional underwater hull cleaning to remove marine growth and improve vessel performance.',
-    price: 299,
-    reviews: [
-      {
-        id: '101',
+const App: React.FC = () => {
+  const [services] = useState<MarineService[]>([
+    {
+      id: '1',
+      name: 'Engine Maintenance',
+      description: 'Complete engine check-up and maintenance service',
+      price: 299.99,
+      duration: '2-3 hours',
+      image: 'https://images.pexels.com/photos/770658/pexels-photo-770658.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      category: 'maintenance',
+      averageRating: 4.8,
+      reviews: [],
+      availability: {
+        nextAvailable: 'Tomorrow',
+        slots: ['9:00 AM', '2:00 PM']
+      },
+      provider: {
+        id: 'p1',
+        name: 'Marine Masters LLC',
+        rating: 4.9,
+        totalServices: 128,
+        joinedDate: '2023-01-15',
+        verified: true
+      }
+    },
+    {
+      id: '2',
+      name: 'Hull Cleaning',
+      description: 'Professional hull cleaning and polishing',
+      price: 199.99,
+      duration: '3-4 hours',
+      image: 'https://images.pexels.com/photos/1090408/pexels-photo-1090408.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      category: 'cleaning',
+      averageRating: 4.7,
+      reviews: [],
+      availability: {
+        nextAvailable: 'Today',
+        slots: ['11:00 AM', '3:00 PM']
+      },
+      provider: {
+        id: 'p2',
+        name: 'Aqua Clean Services',
+        rating: 4.8,
+        totalServices: 95,
+        joinedDate: '2022-11-20',
+        verified: true
+      }
+    },
+    {
+      id: '3',
+      name: 'Electrical System Check',
+      description: 'Comprehensive electrical system inspection',
+      price: 249.99,
+      duration: '2-3 hours',
+      image: 'https://images.pexels.com/photos/4218539/pexels-photo-4218539.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      category: 'maintenance',
+      averageRating: 4.9,
+      reviews: [],
+      availability: {
+        nextAvailable: 'Tomorrow',
+        slots: ['10:00 AM', '1:00 PM']
+      },
+      provider: {
+        id: 'p3',
+        name: 'Marine Electric Pros',
+        rating: 4.7,
+        totalServices: 72,
+        joinedDate: '2023-03-10',
+        verified: true
+      }
+    },
+    {
+      id: '4',
+      name: 'Sail Repair',
+      description: 'Professional sail repair and maintenance',
+      price: 399.99,
+      duration: '4-6 hours',
+      image: 'https://images.pexels.com/photos/1107807/pexels-photo-1107807.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      category: 'repair',
+      averageRating: 4.6,
+      reviews: [],
+      availability: {
+        nextAvailable: 'Tomorrow',
+        slots: ['9:00 AM', '2:00 PM']
+      },
+      provider: {
+        id: 'p4',
+        name: 'Sail Masters',
         rating: 4.5,
-        comment: 'Great service, my boat performs much better now!',
-        authorName: 'John Smith',
-        date: '2024-03-15'
+        totalServices: 58,
+        joinedDate: '2022-09-15',
+        verified: true
+      }
+    },
+    {
+      id: '5',
+      name: 'Boat Detailing',
+      description: 'Complete boat interior and exterior detailing',
+      price: 499.99,
+      duration: '5-7 hours',
+      image: 'https://images.pexels.com/photos/6997882/pexels-photo-6997882.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      category: 'cleaning',
+      averageRating: 4.9,
+      reviews: [],
+      availability: {
+        nextAvailable: 'Today',
+        slots: ['10:00 AM', '3:00 PM']
       },
-      {
-        id: '102',
-        rating: 5,
-        comment: 'Excellent work and very professional team.',
-        authorName: 'Sarah Johnson',
-        date: '2024-03-10'
+      provider: {
+        id: 'p5',
+        name: 'Marine Detailing Pros',
+        rating: 4.8,
+        totalServices: 102,
+        joinedDate: '2023-02-01',
+        verified: true
       }
-    ],
-    averageRating: 4.8,
-    imageUrl: 'https://images.unsplash.com/photo-1540946485063-a40da27545f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-    availability: {
-      nextAvailable: 'Tomorrow',
-      slots: ['9:00 AM', '2:00 PM', '4:30 PM']
-    }
-  },
-  {
-    id: '2',
-    title: 'Propeller Inspection & Repair',
-    description: 'Comprehensive propeller inspection and repair service to ensure optimal performance.',
-    price: 399,
-    reviews: [
-      {
-        id: '201',
-        rating: 4,
-        comment: 'Fixed my propeller issues quickly.',
-        authorName: 'Mike Davis',
-        date: '2024-03-05'
-      }
-    ],
-    averageRating: 4,
-    imageUrl: 'https://images.unsplash.com/photo-1552353617-3bfd679b3bdd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-    availability: {
-      nextAvailable: 'Friday',
-      slots: ['10:00 AM', '3:00 PM']
-    }
-  },
-  {
-    id: '3',
-    title: 'Engine Maintenance',
-    description: 'Complete engine maintenance service including oil changes, filter replacements, and system checks.',
-    price: 549,
-    reviews: [
-      {
-        id: '301',
-        rating: 5,
-        comment: 'Excellent service. Engine running smoothly now.',
-        authorName: 'Robert Chen',
-        date: '2024-03-12'
+    },
+    {
+      id: '6',
+      name: 'Navigation System Installation',
+      description: 'Professional installation of marine navigation systems',
+      price: 799.99,
+      duration: '6-8 hours',
+      image: 'https://images.pexels.com/photos/157577/compass-table-journey-maps-157577.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      category: 'installation',
+      averageRating: 4.7,
+      reviews: [],
+      availability: {
+        nextAvailable: 'Tomorrow',
+        slots: ['9:00 AM', '1:00 PM']
       },
-      {
-        id: '302',
-        rating: 4.5,
-        comment: 'Very thorough and professional.',
-        authorName: 'Lisa Wong',
-        date: '2024-03-01'
+      provider: {
+        id: 'p6',
+        name: 'Marine Tech Solutions',
+        rating: 4.6,
+        totalServices: 84,
+        joinedDate: '2023-01-05',
+        verified: true
       }
-    ],
-    averageRating: 4.7,
-    imageUrl: 'https://images.unsplash.com/photo-1518406432532-9cbef5697723?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-    availability: {
-      nextAvailable: 'Monday',
-      slots: ['8:00 AM', '1:00 PM', '4:00 PM']
     }
-  },
-  {
-    id: '4',
-    title: 'Electrical Systems Repair',
-    description: 'Diagnosis and repair of marine electrical systems, including navigation equipment and lighting.',
-    price: 479,
-    reviews: [
-      {
-        id: '401',
-        rating: 4,
-        comment: 'Fixed our navigation system issues quickly.',
-        authorName: 'James Wilson',
-        date: '2024-02-28'
-      }
-    ],
-    averageRating: 4,
-    imageUrl: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-    availability: {
-      nextAvailable: 'Wednesday',
-      slots: ['10:30 AM', '2:30 PM']
-    }
-  },
-  {
-    id: '5',
-    title: 'Antifouling Treatment',
-    description: 'Application of premium antifouling paint to protect your vessel from marine growth.',
-    price: 699,
-    reviews: [
-      {
-        id: '501',
-        rating: 5,
-        comment: 'Excellent work, very neat application.',
-        authorName: 'Emma Thompson',
-        date: '2024-02-20'
-      },
-      {
-        id: '502',
-        rating: 5,
-        comment: 'Professional service and great results.',
-        authorName: 'David Lee',
-        date: '2024-02-15'
-      },
-      {
-        id: '503',
-        rating: 4.5,
-        comment: 'Very satisfied with the quality.',
-        authorName: 'Sophia Garcia',
-        date: '2024-02-10'
-      }
-    ],
-    averageRating: 4.8,
-    imageUrl: 'https://images.unsplash.com/photo-1605281317010-fe5ffe798166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-    availability: {
-      nextAvailable: 'Next Week',
-      slots: ['9:00 AM', '1:00 PM']
-    }
-  },
-  {
-    id: '6',
-    title: 'Safety Equipment Inspection',
-    description: 'Comprehensive inspection and certification of all marine safety equipment to ensure compliance with regulations.',
-    price: 249,
-    reviews: [
-      {
-        id: '601',
-        rating: 5,
-        comment: 'Very thorough inspection, highly recommended.',
-        authorName: 'Thomas Brown',
-        date: '2024-02-05'
-      },
-      {
-        id: '602',
-        rating: 4,
-        comment: 'Professional service, good attention to detail.',
-        authorName: 'Olivia Martinez',
-        date: '2024-01-28'
-      }
-    ],
-    averageRating: 4.5,
-    imageUrl: 'https://images.unsplash.com/photo-1603539444875-76e7684265f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-    availability: {
-      nextAvailable: 'Tomorrow',
-      slots: ['8:30 AM', '11:00 AM', '2:30 PM', '4:00 PM']
-    }
-  }
-];
-
-function App() {
-  const [services] = useState<MarineService[]>(sampleServices);
-  
-  const handleBookNow = (serviceId: string) => {
-    console.log(`Booking service with ID: ${serviceId}`);
-    // In a real app, this would navigate to a booking page or open a modal
-    alert(`Booking service with ID: ${serviceId}`);
-  };
+  ]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
-      <HeroSection />
-      <FeaturesSection />
-      <ServicesSection services={services} onBookNow={handleBookNow} />
-      <TestimonialsSection />
-      <ContactSection />
-      <Footer />
-    </div>
-  )
-}
+    <ThemeProvider>
+      <Router>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/services" element={<ServicesPage services={services} />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+          </Routes>
+        </Layout>
+      </Router>
+    </ThemeProvider>
+  );
+};
 
-export default App
+export default App;

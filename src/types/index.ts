@@ -6,18 +6,30 @@ export interface Review {
   date: string;
 }
 
+export interface Provider {
+  id: string;
+  name: string;
+  rating: number;
+  totalServices: number;
+  joinedDate: string;
+  verified: boolean;
+}
+
 export interface MarineService {
   id: string;
-  title: string;
+  name: string;
   description: string;
   price: number;
-  reviews: Review[];
-  averageRating: number;
-  imageUrl: string;
-  availability: {
+  duration: string;
+  image: string;
+  category: string;
+  reviews?: Review[];
+  averageRating?: number;
+  availability?: {
     nextAvailable: string;
     slots: string[];
   };
+  provider?: Provider;
 }
 
 export interface VesselDetails {
@@ -37,4 +49,10 @@ export interface BookingDetails {
     email: string;
     phone: string;
   };
+}
+
+export interface BookNowButtonProps {
+  onClick: () => void;
+  isAvailable?: boolean;
+  className?: string;
 }
