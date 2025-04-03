@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const AuthPage: React.FC = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,12 +22,9 @@ const AuthPage: React.FC = () => {
       // In a real app, you would make an API call here
       setLoading(false);
       
-      // Store user info in localStorage for demo purposes
-      localStorage.setItem('user', JSON.stringify({
-        email,
-        name: isLogin ? 'User' : name,
-        isLoggedIn: true
-      }));
+      // Use the login function from AuthContext
+      const userName = isLogin ? email.split('@')[0] : name;
+      login(email, userName);
       
       // Redirect to home page
       navigate('/');
