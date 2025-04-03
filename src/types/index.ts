@@ -4,6 +4,8 @@ export interface Review {
   comment: string;
   authorName: string;
   date: string;
+  avatar?: string; // Optional avatar URL
+  user?: string; // Alternative to authorName for compatibility
 }
 
 export interface Provider {

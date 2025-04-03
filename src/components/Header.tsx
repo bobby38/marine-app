@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext'; 
+import { useAuth } from '../context/AuthContext';
 
 const Header: React.FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme(); 
+  const { user, logout, isAuthenticated } = useAuth();
 
   const isActive = (path: string) => {
     return location.pathname === path 
@@ -15,6 +18,12 @@ const Header: React.FC = () => {
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -46,12 +55,42 @@ const Header: React.FC = () => {
             {theme === 'dark' ? '🌞' : '🌙'}
           </button>
 
-          <Link
-            to="/provider/signup" 
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${theme === 'dark' ? 'bg-blue-500 text-white hover:bg-blue-600' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
-          >
-            Become a Provider
-          </Link>
+          {isAuthenticated ? (
+            <div className="relative group">
+              <button className="flex items-center space-x-1 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
+                <span>Hi, {user?.name}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-10 hidden group-hover:block">
+                <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                  Profile
+                </Link>
+                <Link to="/bookings" className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                  My Bookings
+                </Link>
+                <button 
+                  onClick={handleLogout}
+                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                >
+                  Sign out
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="flex items-center space-x-4">
+              <Link to="/auth" className={`text-sm font-medium ${isActive('/auth')}`}>
+                Sign in
+              </Link>
+              <Link
+                to="/provider/signup" 
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${theme === 'dark' ? 'bg-blue-500 text-white hover:bg-blue-600' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
+              >
+                Become a Provider
+              </Link>
+            </div>
+          )}
         </div>
 
         <div className="sm:hidden flex items-center space-x-4"> 
@@ -128,13 +167,51 @@ const Header: React.FC = () => {
             >
               Contact
             </Link>
-            <Link
-              to="/provider/signup"
-              onClick={toggleMobileMenu} 
-              className={`block px-3 py-2 rounded-md text-base font-medium text-white ${theme === 'dark' ? 'bg-blue-500 hover:bg-blue-600' : 'bg-blue-600 hover:bg-blue-700'}`}
-            >
-              Become a Provider
-            </Link>
+            
+            {isAuthenticated ? (
+              <>
+                <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
+                  <p className="px-3 text-sm text-gray-500 dark:text-gray-400">Signed in as {user?.name}</p>
+                </div>
+                <Link
+                  to="/profile"
+                  onClick={toggleMobileMenu}
+                  className={`px-3 py-2 rounded-md text-base font-medium ${isActive('/profile')}`}
+                >
+                  Profile
+                </Link>
+                <Link
+                  to="/bookings"
+                  onClick={toggleMobileMenu}
+                  className={`px-3 py-2 rounded-md text-base font-medium ${isActive('/bookings')}`}
+                >
+                  My Bookings
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="px-3 py-2 rounded-md text-base font-medium text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 text-left w-full"
+                >
+                  Sign out
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/auth"
+                  onClick={toggleMobileMenu}
+                  className={`px-3 py-2 rounded-md text-base font-medium ${isActive('/auth')}`}
+                >
+                  Sign in / Sign up
+                </Link>
+                <Link
+                  to="/provider/signup"
+                  onClick={toggleMobileMenu} 
+                  className={`block px-3 py-2 rounded-md text-base font-medium text-white ${theme === 'dark' ? 'bg-blue-500 hover:bg-blue-600' : 'bg-blue-600 hover:bg-blue-700'}`}
+                >
+                  Become a Provider
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

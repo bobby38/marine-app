@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
+import { AuthProvider } from './context/AuthContext';
 import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
 import ServicesPage from './pages/ServicesPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
+import ServiceDetailPage from './pages/ServiceDetailPage';
+import AuthPage from './pages/AuthPage';
+import ProfilePage from './pages/ProfilePage';
 import { MarineService } from './types';
 
 const App: React.FC = () => {
@@ -16,7 +20,7 @@ const App: React.FC = () => {
       description: 'Complete engine check-up and maintenance service',
       price: 299.99,
       duration: '2-3 hours',
-      image: 'https://images.pexels.com/photos/770658/pexels-photo-770658.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      image: 'https://images.pexels.com/photos/1008155/pexels-photo-1008155.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       category: 'maintenance',
       averageRating: 4.8,
       reviews: [],
@@ -39,7 +43,7 @@ const App: React.FC = () => {
       description: 'Professional hull cleaning and polishing',
       price: 199.99,
       duration: '3-4 hours',
-      image: 'https://images.pexels.com/photos/1090408/pexels-photo-1090408.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      image: 'https://images.pexels.com/photos/163236/luxury-yacht-boat-speed-water-163236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       category: 'cleaning',
       averageRating: 4.7,
       reviews: [],
@@ -85,7 +89,7 @@ const App: React.FC = () => {
       description: 'Professional sail repair and maintenance',
       price: 399.99,
       duration: '4-6 hours',
-      image: 'https://images.pexels.com/photos/1107807/pexels-photo-1107807.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      image: 'https://images.pexels.com/photos/273886/pexels-photo-273886.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       category: 'repair',
       averageRating: 4.6,
       reviews: [],
@@ -108,7 +112,7 @@ const App: React.FC = () => {
       description: 'Complete boat interior and exterior detailing',
       price: 499.99,
       duration: '5-7 hours',
-      image: 'https://images.pexels.com/photos/6997882/pexels-photo-6997882.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      image: 'https://images.pexels.com/photos/1295036/pexels-photo-1295036.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       category: 'cleaning',
       averageRating: 4.9,
       reviews: [],
@@ -131,7 +135,7 @@ const App: React.FC = () => {
       description: 'Professional installation of marine navigation systems',
       price: 799.99,
       duration: '6-8 hours',
-      image: 'https://images.pexels.com/photos/157577/compass-table-journey-maps-157577.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      image: 'https://images.pexels.com/photos/1430676/pexels-photo-1430676.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       category: 'installation',
       averageRating: 4.7,
       reviews: [],
@@ -152,16 +156,21 @@ const App: React.FC = () => {
 
   return (
     <ThemeProvider>
-      <Router>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/services" element={<ServicesPage services={services} />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-          </Routes>
-        </Layout>
-      </Router>
+      <AuthProvider>
+        <Router>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/services" element={<ServicesPage services={services} />} />
+              <Route path="/services/:id" element={<ServiceDetailPage services={services} />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/auth" element={<AuthPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
+            </Routes>
+          </Layout>
+        </Router>
+      </AuthProvider>
     </ThemeProvider>
   );
 };
