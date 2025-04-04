@@ -5,9 +5,10 @@ import { useAuth } from '../../../context/AuthContext';
 interface ProviderSidebarProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
+  mobile?: boolean;
 }
 
-const ProviderSidebar: React.FC<ProviderSidebarProps> = ({ activeTab, setActiveTab }) => {
+const ProviderSidebar: React.FC<ProviderSidebarProps> = ({ activeTab, setActiveTab, mobile = false }) => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
 
@@ -17,7 +18,7 @@ const ProviderSidebar: React.FC<ProviderSidebarProps> = ({ activeTab, setActiveT
   };
 
   return (
-    <div className="w-full md:w-64 bg-white dark:bg-gray-800 shadow-md">
+    <div className={`${mobile ? 'w-full' : 'w-full md:w-64'} bg-white dark:bg-gray-800 shadow-md`}>
       <div className="p-6 border-b border-gray-200 dark:border-gray-700">
         <div className="flex items-center space-x-4">
           <div className="h-12 w-12 rounded-full bg-blue-500 flex items-center justify-center text-white text-xl font-semibold">
@@ -123,6 +124,39 @@ const ProviderSidebar: React.FC<ProviderSidebarProps> = ({ activeTab, setActiveT
                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clipRule="evenodd" />
               </svg>
               Profile
+            </button>
+          </li>
+        </ul>
+
+        <ul className="space-y-2 mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+          <li>
+            <button
+              onClick={() => setActiveTab('bookings')}
+              className={`w-full flex items-center px-4 py-3 rounded-lg text-left ${
+                activeTab === 'bookings'
+                  ? 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400'
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+              }`}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 00-1-1H6zm0 2h8V3H6v1z" />
+              </svg>
+              Bookings
+            </button>
+          </li>
+          <li>
+            <button
+              onClick={() => setActiveTab('reviews')}
+              className={`w-full flex items-center px-4 py-3 rounded-lg text-left ${
+                activeTab === 'reviews'
+                  ? 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400'
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+              }`}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.39 2.46a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.39-2.46a1 1 0 00-1.175 0l-3.39 2.46c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118l-3.39-2.46c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69l1.286-3.967z" />
+              </svg>
+              Reviews
             </button>
           </li>
         </ul>

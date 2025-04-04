@@ -59,6 +59,14 @@ const HomePage: React.FC = () => {
                 Become a Provider
               </button>
             </div>
+            <div className="mt-6 flex justify-center">
+              <button
+                onClick={() => navigate('/provider/dashboard')}
+                className="px-8 py-4 text-lg font-medium rounded-xl bg-green-600 text-white hover:bg-green-700 transition-all transform hover:scale-105"
+              >
+                Go to Provider Dashboard
+              </button>
+            </div>
           </div>
         </div>
       </div>

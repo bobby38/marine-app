@@ -5,3 +5,5 @@ export { default as ProviderOverview } from './ProviderOverview';
 export { default as ProviderProfile } from './ProviderProfile';
 export { default as ProviderServices } from './ProviderServices';
 export { default as ProviderSidebar } from './ProviderSidebar';
+export { default as ProviderBookings } from './ProviderBookings';
+export { default as ProviderReviews } from './ProviderReviews';

@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const ProfilePage: React.FC = () => {
+  console.log("DEBUG: ProfilePage loaded with 3 dashboard buttons");
   const navigate = useNavigate();
 
   return (
