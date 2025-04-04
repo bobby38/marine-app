@@ -99,15 +99,20 @@ const ServicesPage: React.FC<ServicesPageProps> = ({ services }) => {
       {/* Map View - Conditionally render if services have coords */}
       {servicesWithCoords.length > 0 && (
         <div className="mb-8 h-96 w-full rounded-lg overflow-hidden shadow-lg relative"> 
+           {/* Re-added Blue Tint Overlay */}
+           <div
+            className="absolute inset-0 bg-blue-500 opacity-10 z-10 pointer-events-none"
+          ></div>
           <MapContainer 
             center={mapCenter} 
             zoom={11} 
             scrollWheelZoom={false} 
             style={{ height: "100%", width: "100%" }} 
+            className="relative z-0" /* Ensure map is below overlay */
           >
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-              url="https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png"
+              url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" // Changed to Positron with labels
             />
             {servicesWithCoords.map(service => (
               <Marker 
