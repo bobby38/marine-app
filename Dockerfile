@@ -25,34 +25,13 @@ COPY --from=build /app/dist /usr/share/nginx/html
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Create a script to handle SPA routing and base href
+# Create a simple entrypoint script just to start nginx
 RUN echo '#!/bin/sh\n\
-# Replace base href if needed\n\
-sed -i "s|<base href=\"/\">|<base href=\"$BASE_HREF\">|g" /usr/share/nginx/html/index.html 2>/dev/null || true\n\
-\n\
-# Create a custom 404 page that redirects to index.html for SPA routing\n\
-cat > /usr/share/nginx/html/404.html << EOF\n\
-<!DOCTYPE html>\n\
-<html>\n\
-<head>\n\
-  <meta charset="utf-8">\n\
-  <title>Redirecting...</title>\n\
-  <script>\n\
-    window.location.href = "/";\n\
-  </script>\n\
-</head>\n\
-<body>\n\
-  <p>Redirecting to home page...</p>\n\
-</body>\n\
-</html>\n\
-EOF\n\
-\n\
 # Start nginx\n\
 nginx -g "daemon off;"' > /docker-entrypoint.sh && \
 chmod +x /docker-entrypoint.sh
 
-# Add Coolify-specific configuration
-# Expose port 80 for Coolify
+# Expose port 80
 EXPOSE 80
 
 # Add healthcheck
