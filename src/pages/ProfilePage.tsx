@@ -24,7 +24,12 @@ const ProfilePage: React.FC = () => {
             Switch to User Role
           </button>
           <button
-            onClick={() => updateUserRole('admin')}
+            onClick={() => {
+              updateUserRole('admin');
+              setTimeout(() => {
+                window.location.href = '/admin/dashboard';
+              }, 100);
+            }}
             className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
           >
             Switch to Admin Role
@@ -53,7 +58,12 @@ const ProfilePage: React.FC = () => {
             Switch to User Role
           </button>
           <button
-            onClick={() => updateUserRole('provider')}
+            onClick={() => {
+              updateUserRole('provider');
+              setTimeout(() => {
+                window.location.href = '/provider/dashboard';
+              }, 100);
+            }}
             className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
           >
             Switch to Provider Role
@@ -79,13 +89,23 @@ const ProfilePage: React.FC = () => {
           Switch to User Role
         </button>
         <button
-          onClick={() => updateUserRole('provider')}
+          onClick={() => {
+            updateUserRole('provider');
+            setTimeout(() => {
+              window.location.href = '/provider/dashboard';
+            }, 100);
+          }}
           className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
         >
           Switch to Provider Role
         </button>
         <button
-          onClick={() => updateUserRole('admin')}
+          onClick={() => {
+            updateUserRole('admin');
+            setTimeout(() => {
+              window.location.href = '/admin/dashboard';
+            }, 100);
+          }}
           className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
         >
           Switch to Admin Role

@@ -27,6 +27,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     // Check if user is stored in localStorage on component mount
     const storedUser = localStorage.getItem('user');
+    console.log('[AuthContext] Loaded user from localStorage:', storedUser);
     if (storedUser) {
       try {
         setUser(JSON.parse(storedUser));
@@ -34,11 +35,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         console.error('Error parsing user from localStorage:', error);
         localStorage.removeItem('user');
       }
+    } else {
+      console.log('[AuthContext] No user found in localStorage');
     }
   }, []);
 
   const login = (email: string, name: string) => {
     const newUser = { email, name, isLoggedIn: true, role: 'user' as const };
+    console.log('[AuthContext] Logging in user with role:', newUser.role);
     setUser(newUser);
     localStorage.setItem('user', JSON.stringify(newUser));
   };
@@ -50,6 +54,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const updateUserRole = (role: User['role']) => {
     if (user) {
+      console.log('[AuthContext] Updated user role to:', role);
       const updatedUser = { ...user, role };
       setUser(updatedUser);
       localStorage.setItem('user', JSON.stringify(updatedUser));
