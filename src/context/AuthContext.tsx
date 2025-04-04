@@ -5,20 +5,25 @@ interface User {
   name: string;
   isLoggedIn: boolean;
   avatar?: string;
+  role: 'user' | 'provider' | 'admin';
 }
 
 interface AuthContextType {
   user: User | null;
   login: (email: string, name: string) => void;
   logout: () => void;
+  updateUserRole: (role: User['role']) => void;
   isAuthenticated: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
-  
+  const [user, setUser] = useState<User | null>(() => {
+    const savedUser = localStorage.getItem('user');
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
+
   useEffect(() => {
     // Check if user is stored in localStorage on component mount
     const storedUser = localStorage.getItem('user');
@@ -33,7 +38,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const login = (email: string, name: string) => {
-    const newUser = { email, name, isLoggedIn: true };
+    const newUser = { email, name, isLoggedIn: true, role: 'user' as const };
     setUser(newUser);
     localStorage.setItem('user', JSON.stringify(newUser));
   };
@@ -43,8 +48,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     localStorage.removeItem('user');
   };
 
+  const updateUserRole = (role: User['role']) => {
+    if (user) {
+      const updatedUser = { ...user, role };
+      setUser(updatedUser);
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, logout, isAuthenticated: !!user }}>
+    <AuthContext.Provider value={{ user, login, logout, updateUserRole, isAuthenticated: !!user }}>
       {children}
     </AuthContext.Provider>
   );
@@ -57,3 +70,5 @@ export const useAuth = (): AuthContextType => {
   }
   return context;
 };
+
+export default AuthProvider;

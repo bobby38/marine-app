@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import ProviderProfile from '../features/provider/components/ProviderProfile';
 
 const ProfilePage: React.FC = () => {
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, updateUserRole } = useAuth();
   const [activeTab, setActiveTab] = useState('profile');
 
   // Redirect to login if not authenticated
@@ -11,9 +12,56 @@ const ProfilePage: React.FC = () => {
     return <Navigate to="/auth" />;
   }
 
+  if (user?.role === 'provider') {
+    return (
+      <div className="max-w-5xl mx-auto p-4">
+        <div className="mb-4">
+          <button
+            onClick={() => updateUserRole('user')}
+            className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+          >
+            Switch to User Role
+          </button>
+        </div>
+        <ProviderProfile />
+      </div>
+    );
+  }
+
+  if (user?.role === 'admin') {
+    return (
+      <div className="max-w-5xl mx-auto p-4">
+        <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
+        <p className="text-gray-600 dark:text-gray-300">Admin features coming soon.</p>
+        <div className="mt-4">
+          <button
+            onClick={() => updateUserRole('user')}
+            className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+          >
+            Switch to User Role
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-4xl mx-auto">
       <h1 className="text-3xl font-bold mb-6">My Profile</h1>
+      <div className="mb-4">
+        <button
+          onClick={() => updateUserRole('provider')}
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          Switch to Provider Role
+        </button>
+        <button
+          onClick={() => updateUserRole('admin')}
+          className="ml-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+        >
+          Switch to Admin Role
+        </button>
+      </div>
       
       <div className="bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden">
         <div className="border-b border-gray-200 dark:border-gray-700">

@@ -2,6 +2,14 @@ import React from 'react';
 
 const AboutPage: React.FC = () => {
   return (
+    <>
+      <div className="relative h-64 mb-12">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-900 dark:to-indigo-900"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center items-center text-center">
+          <h1 className="text-4xl font-bold text-white mb-2">About MarineServices</h1>
+          <p className="text-xl text-blue-100">Learn more about our mission and values</p>
+        </div>
+      </div>
     <div className="py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-3xl font-bold text-center mb-8 dark:text-white">About MarineServices</h1>
@@ -155,7 +163,7 @@ const AboutPage: React.FC = () => {
               Find Services
             </a>
             <a
-              href="/provider/signup"
+              href="/become-provider"
               className="px-6 py-3 border border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
             >
               Become a Provider
@@ -164,6 +172,7 @@ const AboutPage: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -181,6 +181,20 @@ const AuthPage: React.FC = () => {
             </div>
           </div>
         </form>
+        <div className="mt-8 text-center border-t border-gray-200 dark:border-gray-700 pt-6">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+            Are you a marine service provider?
+          </h3>
+          <p className="text-gray-600 dark:text-gray-400 mb-4">
+            Join us and grow your business by reaching more customers.
+          </p>
+          <a
+            href="/become-provider"
+            className="inline-block px-6 py-2 border border-blue-600 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
+          >
+            Become a Provider
+          </a>
+        </div>
       </div>
     </div>
   );
