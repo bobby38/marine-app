@@ -52,7 +52,7 @@ const Footer: React.FC = () => {
               <li><Link to="/provider/signup" className="hover:text-white dark:hover:text-gray-300">Become a Provider</Link></li>
               <li><Link to="/provider/login" className="hover:text-white dark:hover:text-gray-300">Provider Login</Link></li>
               <li><Link to="/provider/dashboard" className="hover:text-white dark:hover:text-gray-300">Provider Dashboard</Link></li>
-              <li><Link to="/provider/help" className="hover:text-white dark:hover:text-gray-300">Provider Support</Link></li>
+              {/* <li><Link to="/provider/help" className="hover:text-white dark:hover:text-gray-300">Provider Support</Link></li> */}
             </ul>
           </div>
 
@@ -63,7 +63,7 @@ const Footer: React.FC = () => {
               <li><Link to="/user/signup" className="hover:text-white dark:hover:text-gray-300">Sign Up</Link></li>
               <li><Link to="/user/login" className="hover:text-white dark:hover:text-gray-300">Login</Link></li>
               <li><Link to="/user/dashboard" className="hover:text-white dark:hover:text-gray-300">My Bookings</Link></li>
-              <li><Link to="/help" className="hover:text-white dark:hover:text-gray-300">Help Center</Link></li>
+              {/* <li><Link to="/help" className="hover:text-white dark:hover:text-gray-300">Help Center</Link></li> */}
             </ul>
           </div>
         </div>
@@ -75,9 +75,9 @@ const Footer: React.FC = () => {
               &copy; {new Date().getFullYear()} Marine Services. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <Link to="/privacy" className="text-sm hover:text-white dark:hover:text-gray-300">Privacy Policy</Link>
-              <Link to="/terms" className="text-sm hover:text-white dark:hover:text-gray-300">Terms of Service</Link>
-              <Link to="/sitemap" className="text-sm hover:text-white dark:hover:text-gray-300">Sitemap</Link>
+              {/* <Link to="/privacy" className="text-sm hover:text-white dark:hover:text-gray-300">Privacy Policy</Link> */}
+              {/* <Link to="/terms" className="text-sm hover:text-white dark:hover:text-gray-300">Terms of Service</Link> */}
+              {/* <Link to="/sitemap" className="text-sm hover:text-white dark:hover:text-gray-300">Sitemap</Link> */}
             </div>
           </div>
         </div>

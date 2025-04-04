@@ -10,6 +10,13 @@ const AboutPage: React.FC = () => {
           <p className="text-xl text-blue-100">Learn more about our mission and values</p>
         </div>
       </div>
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+      <img
+        src="https://images.unsplash.com/photo-1505839673365-e3971f8d9184?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+        alt="Marine Vessel"
+        className="w-full h-auto rounded-xl shadow-lg object-cover"
+      />
+    </div>
     <div className="py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-3xl font-bold text-center mb-8 dark:text-white">About MarineServices</h1>
@@ -95,7 +102,7 @@ const AboutPage: React.FC = () => {
           <h2 className="text-2xl font-semibold mb-8 dark:text-white text-center">Meet Our Team</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg" alt="John Doe" className="w-32 h-32 rounded-full mx-auto mb-4" />
+              <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg" alt="John Doe" className="w-32 h-32 rounded-full object-cover mx-auto mb-4" />
               <h3 className="font-semibold dark:text-white">John Doe</h3>
               <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">CEO & Founder</p>
               <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -103,7 +110,7 @@ const AboutPage: React.FC = () => {
               </p>
             </div>
             <div className="text-center">
-              <img src="https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg" alt="Jane Smith" className="w-32 h-32 rounded-full mx-auto mb-4" />
+              <img src="https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg" alt="Jane Smith" className="w-32 h-32 rounded-full object-cover mx-auto mb-4" />
               <h3 className="font-semibold dark:text-white">Jane Smith</h3>
               <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">Operations Manager</p>
               <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -111,7 +118,7 @@ const AboutPage: React.FC = () => {
               </p>
             </div>
             <div className="text-center">
-              <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg" alt="Mike Johnson" className="w-32 h-32 rounded-full mx-auto mb-4" />
+              <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg" alt="Mike Johnson" className="w-32 h-32 rounded-full object-cover mx-auto mb-4" />
               <h3 className="font-semibold dark:text-white">Mike Johnson</h3>
               <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">Customer Success Lead</p>
               <p className="text-sm text-gray-500 dark:text-gray-400">
