@@ -6,8 +6,19 @@ const AdminDashboard: React.FC = () => {
   const [selectedPeriod, setSelectedPeriod] = useState('2023');
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  React.useEffect(() => {
+    const checkOverflow = () => {
+      if (document.body.scrollWidth > window.innerWidth) {
+        console.warn('Horizontal overflow detected in AdminDashboard');
+      }
+    };
+    window.addEventListener('resize', checkOverflow);
+    checkOverflow();
+    return () => window.removeEventListener('resize', checkOverflow);
+  }, []);
+
   return (
-    <div className="flex min-h-screen bg-gray-900 text-white">
+    <div className="flex min-h-screen bg-gray-900 text-white overflow-x-hidden max-w-full outline outline-2 outline-red-500">
       {/* Mobile sidebar overlay */}
       <div className={`fixed inset-0 z-40 md:hidden ${sidebarOpen ? 'block' : 'hidden'}`}>
         <div className="fixed inset-0 bg-gray-900 bg-opacity-75" onClick={() => setSidebarOpen(false)}></div>
