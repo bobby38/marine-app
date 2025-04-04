@@ -6,7 +6,6 @@ import ServicesPage from './pages/ServicesPage';
 import ServiceDetailPage from './pages/ServiceDetailPage';
 import AuthPage from './pages/AuthPage';
 import BecomeProviderPage from './pages/BecomeProviderPage';
-import ProviderDashboard from './pages/provider/ProviderDashboard';
 import ProviderDashboardPage from './pages/provider/ProviderDashboardPage';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import UserDashboard from './pages/user/UserDashboard';
@@ -32,10 +31,10 @@ const App: React.FC = () => {
               <Route path="/auth" element={<AuthPage />} />
               <Route path="/become-provider" element={<BecomeProviderPage />} />
               <Route path="/provider/signup" element={<BecomeProviderPage />} />
-              <Route path="/provider/dashboard" element={<ProviderDashboardPage />} />
+              <Route path="/provider/dashboard/*" element={<ProviderDashboardPage />} />
               <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/admin/dashboard" element={<AdminDashboard />} />
-              <Route path="/user/dashboard" element={<UserDashboard />} />
+              <Route path="/admin/dashboard/*" element={<AdminDashboard />} />
+              <Route path="/user/dashboard/*" element={<UserDashboard />} />
               <Route path="/bookings" element={<BookingsPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/contact" element={<ContactPage />} />

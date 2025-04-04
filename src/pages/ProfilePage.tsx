@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const ProfilePage: React.FC = () => {
-  const { user, updateUserRole } = useAuth();
+  const { user } = useAuth();
   const [activeTab, setActiveTab] = useState('profile');
   const navigate = useNavigate();
 
@@ -11,25 +11,25 @@ const ProfilePage: React.FC = () => {
     <div className="max-w-5xl mx-auto p-4">
       <h1 className="text-3xl font-bold mb-6">My Profile</h1>
       
-      {/* Role switching buttons */}
-      <div className="mb-6 flex flex-wrap gap-4">
+      {/* Direct dashboard links */}
+      <div className="mb-6 flex space-x-4">
         <button
-          onClick={() => {
-            updateUserRole('provider');
-            setTimeout(() => navigate('/provider/dashboard'), 100);
-          }}
+          onClick={() => navigate('/user/dashboard')}
           className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
         >
-          Switch to Provider Role
+          Go to User Dashboard
         </button>
         <button
-          onClick={() => {
-            updateUserRole('admin');
-            setTimeout(() => navigate('/admin/dashboard'), 100);
-          }}
-          className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+          onClick={() => navigate('/provider/dashboard')}
+          className="px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
         >
-          Switch to Admin Role
+          Go to Provider Dashboard
+        </button>
+        <button
+          onClick={() => navigate('/admin/dashboard')}
+          className="px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
+        >
+          Go to Admin Dashboard
         </button>
       </div>
       
