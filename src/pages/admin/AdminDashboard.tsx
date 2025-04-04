@@ -126,6 +126,36 @@ const AdminDashboard: React.FC = () => {
             >
               Reports
             </button>
+            <button
+              onClick={() => setActiveTab('marketing')}
+              className={`px-3 py-2 text-sm rounded-md whitespace-nowrap ${
+                activeTab === 'marketing'
+                  ? 'bg-blue-600 text-white'
+                  : 'text-gray-300 hover:bg-gray-700'
+              }`}
+            >
+              Marketing
+            </button>
+            <button
+              onClick={() => setActiveTab('broadcasts')}
+              className={`px-3 py-2 text-sm rounded-md whitespace-nowrap ${
+                activeTab === 'broadcasts'
+                  ? 'bg-blue-600 text-white'
+                  : 'text-gray-300 hover:bg-gray-700'
+              }`}
+            >
+              Broadcasts
+            </button>
+            <button
+              onClick={() => setActiveTab('communications')}
+              className={`px-3 py-2 text-sm rounded-md whitespace-nowrap ${
+                activeTab === 'communications'
+                  ? 'bg-blue-600 text-white'
+                  : 'text-gray-300 hover:bg-gray-700'
+              }`}
+            >
+              Communications
+            </button>
           </div>
         </header>
 
@@ -463,6 +493,248 @@ const AdminDashboard: React.FC = () => {
                     </div>
                     <div className="w-full bg-gray-700 rounded-full h-2">
                       <div className="bg-blue-500 h-2 rounded-full" style={{ width: '30%' }}></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          {activeTab === 'marketing' && (
+            <div className="space-y-4">
+              <div className="bg-gray-800 rounded-lg p-4">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-base font-semibold text-white">Marketing Tools</h3>
+                  <button className="px-3 py-1.5 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700">Create Campaign</button>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {/* Email Marketing */}
+                  <div className="bg-gray-700 rounded-lg p-4">
+                    <div className="flex items-center mb-3">
+                      <div className="rounded-full bg-blue-900 p-2 mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                      <h4 className="text-sm font-medium text-white">Email Campaigns</h4>
+                    </div>
+                    <p className="text-xs text-gray-400 mb-3">Send targeted emails to customers and providers</p>
+                    <button className="w-full px-3 py-1.5 bg-gray-600 text-white text-xs rounded-md hover:bg-gray-500">Manage</button>
+                  </div>
+                  
+                  {/* Discount Codes */}
+                  <div className="bg-gray-700 rounded-lg p-4">
+                    <div className="flex items-center mb-3">
+                      <div className="rounded-full bg-green-900 p-2 mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                        </svg>
+                      </div>
+                      <h4 className="text-sm font-medium text-white">Discount Codes</h4>
+                    </div>
+                    <p className="text-xs text-gray-400 mb-3">Create and manage promotional codes</p>
+                    <button className="w-full px-3 py-1.5 bg-gray-600 text-white text-xs rounded-md hover:bg-gray-500">Manage</button>
+                  </div>
+                  
+                  {/* Broadcasts */}
+                  <div className="bg-gray-700 rounded-lg p-4">
+                    <div className="flex items-center mb-3">
+                      <div className="rounded-full bg-purple-900 p-2 mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+                        </svg>
+                      </div>
+                      <h4 className="text-sm font-medium text-white">Broadcasts</h4>
+                    </div>
+                    <p className="text-xs text-gray-400 mb-3">Send announcements to all users</p>
+                    <button className="w-full px-3 py-1.5 bg-gray-600 text-white text-xs rounded-md hover:bg-gray-500">Manage</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          {activeTab === 'broadcasts' && (
+            <div className="space-y-4">
+              <div className="bg-gray-800 rounded-lg p-4">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-base font-semibold text-white">Create Broadcast</h3>
+                </div>
+                <div className="space-y-3">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-1">Message Title</label>
+                    <input type="text" className="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white" placeholder="Enter message title" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-1">Message</label>
+                    <textarea className="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white h-24" placeholder="Enter your message"></textarea>
+                  </div>
+                  <div className="flex justify-end">
+                    <button className="px-4 py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700">Send Broadcast</button>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-gray-800 rounded-lg p-4">
+                <h3 className="text-base font-semibold text-white mb-4">Recent Broadcasts</h3>
+                <div className="space-y-3">
+                  <div className="bg-gray-700 rounded-lg p-3">
+                    <div className="flex justify-between mb-1">
+                      <div className="text-sm font-medium text-white">System Maintenance</div>
+                      <div className="text-xs text-gray-400">Apr 1, 2025</div>
+                    </div>
+                    <p className="text-xs text-gray-400 mb-2">Scheduled maintenance on April 5th from 2-4 AM EST.</p>
+                    <div className="flex justify-between items-center">
+                      <span className="text-xs text-gray-400">Sent to: All Users</span>
+                      <button className="text-xs text-blue-400 hover:text-blue-300">View Details</button>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-gray-700 rounded-lg p-3">
+                    <div className="flex justify-between mb-1">
+                      <div className="text-sm font-medium text-white">New Feature Announcement</div>
+                      <div className="text-xs text-gray-400">Mar 20, 2025</div>
+                    </div>
+                    <p className="text-xs text-gray-400 mb-2">We've added new booking features to improve your experience.</p>
+                    <div className="flex justify-between items-center">
+                      <span className="text-xs text-gray-400">Sent to: All Users</span>
+                      <button className="text-xs text-blue-400 hover:text-blue-300">View Details</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          {activeTab === 'communications' && (
+            <div className="space-y-4">
+              <div className="bg-gray-800 rounded-lg p-4">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-base font-semibold text-white">User Messages</h3>
+                  <div>
+                    <select className="bg-gray-700 border border-gray-600 rounded-md px-2 py-1 text-sm text-white">
+                      <option value="all">All Messages</option>
+                      <option value="unread">Unread</option>
+                      <option value="flagged">Flagged</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div className="overflow-x-auto">
+                  <table className="min-w-full divide-y divide-gray-700">
+                    <thead className="bg-gray-800">
+                      <tr>
+                        <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">User</th>
+                        <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Subject</th>
+                        <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Date</th>
+                        <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Status</th>
+                        <th scope="col" className="px-4 py-3 text-right text-xs font-medium text-gray-400 uppercase tracking-wider">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-gray-800 divide-y divide-gray-700">
+                      <tr>
+                        <td className="px-4 py-4 whitespace-nowrap">
+                          <div className="text-sm font-medium text-white">John Smith</div>
+                          <div className="text-xs text-gray-400">Customer</div>
+                        </td>
+                        <td className="px-4 py-4 whitespace-nowrap">
+                          <div className="text-sm text-gray-300">Booking Cancellation</div>
+                        </td>
+                        <td className="px-4 py-4 whitespace-nowrap">
+                          <div className="text-sm text-gray-400">Apr 3, 2025</div>
+                        </td>
+                        <td className="px-4 py-4 whitespace-nowrap">
+                          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-900 text-red-300">Unread</span>
+                        </td>
+                        <td className="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
+                          <button className="text-blue-400 hover:text-blue-300">Reply</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-4 whitespace-nowrap">
+                          <div className="text-sm font-medium text-white">Sarah Johnson</div>
+                          <div className="text-xs text-gray-400">Provider</div>
+                        </td>
+                        <td className="px-4 py-4 whitespace-nowrap">
+                          <div className="text-sm text-gray-300">Payment Issue</div>
+                        </td>
+                        <td className="px-4 py-4 whitespace-nowrap">
+                          <div className="text-sm text-gray-400">Apr 1, 2025</div>
+                        </td>
+                        <td className="px-4 py-4 whitespace-nowrap">
+                          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-900 text-yellow-300">Flagged</span>
+                        </td>
+                        <td className="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
+                          <button className="text-blue-400 hover:text-blue-300">Reply</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-gray-800 rounded-lg p-4">
+                  <h3 className="text-base font-semibold text-white mb-4">Support Performance</h3>
+                  <div className="space-y-4">
+                    <div>
+                      <div className="flex justify-between mb-1">
+                        <span className="text-sm text-gray-400">Average Response Time</span>
+                        <span className="text-sm text-white">2.4 hours</span>
+                      </div>
+                      <div className="w-full bg-gray-700 rounded-full h-2">
+                        <div className="bg-green-500 h-2 rounded-full" style={{ width: '85%' }}></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex justify-between mb-1">
+                        <span className="text-sm text-gray-400">Resolution Rate</span>
+                        <span className="text-sm text-white">92%</span>
+                      </div>
+                      <div className="w-full bg-gray-700 rounded-full h-2">
+                        <div className="bg-blue-500 h-2 rounded-full" style={{ width: '92%' }}></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex justify-between mb-1">
+                        <span className="text-sm text-gray-400">Customer Satisfaction</span>
+                        <span className="text-sm text-white">4.7/5</span>
+                      </div>
+                      <div className="w-full bg-gray-700 rounded-full h-2">
+                        <div className="bg-purple-500 h-2 rounded-full" style={{ width: '94%' }}></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-gray-800 rounded-lg p-4">
+                  <h3 className="text-base font-semibold text-white mb-4">Message Volume</h3>
+                  <div className="h-40 flex items-end justify-between px-2">
+                    <div className="flex flex-col items-center">
+                      <div className="bg-blue-500 w-8 rounded-t" style={{ height: '30%' }}></div>
+                      <span className="text-xs text-gray-400 mt-1">Mon</span>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <div className="bg-blue-500 w-8 rounded-t" style={{ height: '60%' }}></div>
+                      <span className="text-xs text-gray-400 mt-1">Tue</span>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <div className="bg-blue-500 w-8 rounded-t" style={{ height: '45%' }}></div>
+                      <span className="text-xs text-gray-400 mt-1">Wed</span>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <div className="bg-blue-500 w-8 rounded-t" style={{ height: '75%' }}></div>
+                      <span className="text-xs text-gray-400 mt-1">Thu</span>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <div className="bg-blue-500 w-8 rounded-t" style={{ height: '90%' }}></div>
+                      <span className="text-xs text-gray-400 mt-1">Fri</span>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <div className="bg-blue-500 w-8 rounded-t" style={{ height: '40%' }}></div>
+                      <span className="text-xs text-gray-400 mt-1">Sat</span>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <div className="bg-blue-500 w-8 rounded-t" style={{ height: '20%' }}></div>
+                      <span className="text-xs text-gray-400 mt-1">Sun</span>
                     </div>
                   </div>
                 </div>
