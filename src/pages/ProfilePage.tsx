@@ -34,12 +34,12 @@ const ProfilePage: React.FC = () => {
           >
             Switch to Admin Role
           </button>
-          <a
-            href="/provider/dashboard"
-            className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors inline-block"
+          <button
+            onClick={() => window.location.href = '/provider/dashboard'}
+            className="px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
           >
             Go to Provider Dashboard
-          </a>
+          </button>
         </div>
         <ProviderProfile />
       </div>
@@ -68,12 +68,12 @@ const ProfilePage: React.FC = () => {
           >
             Switch to Provider Role
           </button>
-          <a
-            href="/admin/dashboard"
-            className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors inline-block"
+          <button
+            onClick={() => window.location.href = '/admin/dashboard'}
+            className="px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
           >
             Go to Admin Dashboard
-          </a>
+          </button>
         </div>
       </div>
     );
@@ -106,7 +106,7 @@ const ProfilePage: React.FC = () => {
               window.location.href = '/admin/dashboard';
             }, 100);
           }}
-          className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+          className="px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors"
         >
           Switch to Admin Role
         </button>
