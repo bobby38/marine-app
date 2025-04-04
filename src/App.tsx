@@ -8,7 +8,8 @@ import AuthPage from './pages/AuthPage';
 import BecomeProviderPage from './pages/BecomeProviderPage';
 import ProviderDashboard from './pages/provider/ProviderDashboard';
 import ProviderDashboardPage from './pages/provider/ProviderDashboardPage';
-import AdminDashboardPage from './pages/admin/AdminDashboardPage';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import UserDashboard from './pages/user/UserDashboard';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import ProfilePage from './pages/ProfilePage';
@@ -33,7 +34,8 @@ const App: React.FC = () => {
               <Route path="/provider/signup" element={<BecomeProviderPage />} />
               <Route path="/provider/dashboard" element={<ProviderDashboardPage />} />
               <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+              <Route path="/admin/dashboard" element={<AdminDashboard />} />
+              <Route path="/user/dashboard" element={<UserDashboard />} />
               <Route path="/bookings" element={<BookingsPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/contact" element={<ContactPage />} />
