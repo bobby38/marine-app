@@ -137,43 +137,45 @@ const AdminDashboard: React.FC = () => {
             >
               Reports
             </button>
-            <button
-              onClick={() => setActiveTab('marketing')}
-              className={`px-3 py-2 text-sm rounded-md whitespace-nowrap ${
-                activeTab === 'marketing'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-300 hover:bg-gray-700'
-              }`}
-            >
-              Marketing
-            </button>
-            <button
-              onClick={() => setActiveTab('broadcasts')}
-              className={`px-3 py-2 text-sm rounded-md whitespace-nowrap ${
-                activeTab === 'broadcasts'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-300 hover:bg-gray-700'
-              }`}
-            >
-              Broadcasts
-            </button>
-            <button
-              onClick={() => setActiveTab('communications')}
-              className={`px-3 py-2 text-sm rounded-md whitespace-nowrap ${
-                activeTab === 'communications'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-300 hover:bg-gray-700'
-              }`}
-            >
-              Communications
-            </button>
+            <div className="hidden md:flex space-x-4">
+              <button
+                onClick={() => setActiveTab('marketing')}
+                className={`px-3 py-2 text-sm rounded-md whitespace-nowrap ${
+                  activeTab === 'marketing'
+                    ? 'bg-blue-600 text-white'
+                    : 'text-gray-300 hover:bg-gray-700'
+                }`}
+              >
+                Marketing
+              </button>
+              <button
+                onClick={() => setActiveTab('broadcasts')}
+                className={`px-3 py-2 text-sm rounded-md whitespace-nowrap ${
+                  activeTab === 'broadcasts'
+                    ? 'bg-blue-600 text-white'
+                    : 'text-gray-300 hover:bg-gray-700'
+                }`}
+              >
+                Broadcasts
+              </button>
+              <button
+                onClick={() => setActiveTab('communications')}
+                className={`px-3 py-2 text-sm rounded-md whitespace-nowrap ${
+                  activeTab === 'communications'
+                    ? 'bg-blue-600 text-white'
+                    : 'text-gray-300 hover:bg-gray-700'
+                }`}
+              >
+                Communications
+              </button>
+            </div>
           </div>
         </header>
 
-        <div className="p-4 space-y-4 flex-1 overflow-y-auto">
+        <div className="p-4 space-y-4 flex-1 overflow-y-auto w-full max-w-full">
           {activeTab === 'overview' && (
             <div className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="bg-gray-800 rounded-lg p-4">
                   <div className="flex items-center">
                     <div className="rounded-full bg-green-900 p-3 mr-4">

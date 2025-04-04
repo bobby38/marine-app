@@ -21,69 +21,82 @@ import { servicesData } from './data/servicesData';
 const App: React.FC = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
 
+  React.useEffect(() => {
+    const checkOverflow = () => {
+      if (document.body.scrollWidth > window.innerWidth) {
+        console.warn('Global horizontal overflow detected');
+      }
+    };
+    window.addEventListener('resize', checkOverflow);
+    checkOverflow();
+    return () => window.removeEventListener('resize', checkOverflow);
+  }, []);
+
   return (
-    <ThemeProvider>
-      <AuthProvider>
-        <Router>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/services" element={<ServicesPage services={servicesData} />} />
-              <Route path="/services/:id" element={<ServiceDetailPage services={servicesData} />} />
-              <Route path="/auth" element={<AuthPage />} />
-              <Route path="/become-provider" element={<BecomeProviderPage />} />
-              <Route path="/provider/signup" element={<BecomeProviderPage />} />
-              <Route path="/provider/dashboard/*" element={<ProviderDashboardPage />} />
-              <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/admin/dashboard/*" element={<AdminDashboard />} />
-              <Route path="/user/dashboard/*" element={<UserDashboard />} />
-              <Route path="/bookings" element={<BookingsPage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="/test" element={<TestPage />} />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </Layout>
-        </Router>
-      </AuthProvider>
+    <div className="overflow-x-hidden max-w-full">
+      <ThemeProvider>
+        <AuthProvider>
+          <Router>
+            <Layout>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/services" element={<ServicesPage services={servicesData} />} />
+                <Route path="/services/:id" element={<ServiceDetailPage services={servicesData} />} />
+                <Route path="/auth" element={<AuthPage />} />
+                <Route path="/become-provider" element={<BecomeProviderPage />} />
+                <Route path="/provider/signup" element={<BecomeProviderPage />} />
+                <Route path="/provider/dashboard/*" element={<ProviderDashboardPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/admin/dashboard/*" element={<AdminDashboard />} />
+                <Route path="/user/dashboard/*" element={<UserDashboard />} />
+                <Route path="/bookings" element={<BookingsPage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/test" element={<TestPage />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </Layout>
+          </Router>
+        </AuthProvider>
 
-      {/* Chat toggle button */}
-      <button
-        onClick={() => setIsChatOpen(!isChatOpen)}
-        className="fixed bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white rounded-full w-20 h-20 flex items-center justify-center shadow-lg transition-colors z-50 text-3xl"
-        title="Chat with us"
-      >
-        💬
-      </button>
+        {/* Chat toggle button */}
+        <button
+          onClick={() => setIsChatOpen(!isChatOpen)}
+          className="fixed bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white rounded-full w-20 h-20 flex items-center justify-center shadow-lg transition-colors z-50 text-3xl max-w-full overflow-hidden outline outline-2 outline-yellow-500"
+          title="Chat with us"
+        >
+          💬
+        </button>
 
-      {/* Dummy chat window */}
-      {isChatOpen && (
-        <div className="fixed bottom-24 right-4 w-96 max-w-full bg-white text-black rounded-lg shadow-2xl z-50 flex flex-col overflow-hidden border border-gray-300">
-          <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-3 flex justify-between items-center">
-            <span className="font-semibold">Chat Support</span>
-            <button onClick={() => setIsChatOpen(false)} className="text-white font-bold text-xl">×</button>
-          </div>
-          <div className="flex-1 p-4 overflow-y-auto space-y-2">
-            <div className="bg-gray-100 text-black p-3 rounded-2xl self-start max-w-xs shadow">
-              Hello! How can we assist you today?
+        {/* Dummy chat window */}
+        {isChatOpen && (
+          <div className="fixed bottom-24 right-4 w-96 max-w-full bg-white text-black rounded-lg shadow-2xl z-50 flex flex-col overflow-hidden border border-gray-300">
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-3 flex justify-between items-center">
+              <span className="font-semibold">Chat Support</span>
+              <button onClick={() => setIsChatOpen(false)} className="text-white font-bold text-xl">×</button>
             </div>
-            <div className="bg-blue-600 text-white p-3 rounded-2xl self-end max-w-xs shadow">
-              I have a question about your services.
+            <div className="flex-1 p-4 overflow-y-auto space-y-2">
+              <div className="bg-gray-100 text-black p-3 rounded-2xl self-start max-w-xs shadow">
+                Hello! How can we assist you today?
+              </div>
+              <div className="bg-blue-600 text-white p-3 rounded-2xl self-end max-w-xs shadow">
+                I have a question about your services.
+              </div>
+            </div>
+            <div className="p-2 border-t border-gray-300 dark:border-gray-700 flex">
+              <input
+                type="text"
+                placeholder="Type a message..."
+                className="flex-1 px-3 py-2 rounded-l-lg border border-gray-300 dark:border-gray-700 focus:outline-none"
+              />
+              <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-r-lg">
+                Send
+              </button>
             </div>
           </div>
-          <div className="p-2 border-t border-gray-300 dark:border-gray-700 flex">
-            <input
-              type="text"
-              placeholder="Type a message..."
-              className="flex-1 px-3 py-2 rounded-l-lg border border-gray-300 dark:border-gray-700 focus:outline-none"
-            />
-            <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-r-lg">
-              Send
-            </button>
-          </div>
-        </div>
-      )}
-    </ThemeProvider>
+        )}
+      </ThemeProvider>
+    </div>
   );
 };
 
