@@ -8,7 +8,7 @@ export const servicesData: MarineService[] = [
     description: 'Complete engine check-up and maintenance service',
     price: 299.99,
     duration: '2-3 hours',
-    image: 'https://images.unsplash.com/photo-1575384043001-f37f146b614e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1605281317010-fe5ffe798166?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
     category: 'maintenance',
     averageRating: 4.8,
     reviews: [],
@@ -158,7 +158,7 @@ export const servicesData: MarineService[] = [
     description: 'High-speed fun on the water near East Coast Park.',
     price: 180,
     duration: '2-3 hours',
-    image: '/images/jet_ski.jpg',
+    image: 'https://images.unsplash.com/photo-1592194996308-7b43878e84a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     category: 'Rental',
     averageRating: 4.4,
     reviews: [],
@@ -176,5 +176,31 @@ export const servicesData: MarineService[] = [
     },
     latitude: 1.3061, 
     longitude: 103.9303
+  }
+  ,
+  {
+    id: '8',
+    name: 'Life Jacket Rental',
+    description: 'Rent high-quality life jackets for your marine adventures.',
+    price: 20,
+    duration: 'Per day',
+    image: 'https://images.unsplash.com/photo-1605281317010-fe5ffe798166?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80',
+    category: 'Rental',
+    averageRating: 4.5,
+    reviews: [],
+    availability: {
+      nextAvailable: 'Today',
+      slots: ['9:00 AM', '1:00 PM']
+    },
+    provider: {
+      id: 'p8',
+      name: 'Safety First Rentals',
+      rating: 4.6,
+      totalServices: 40,
+      joinedDate: '2023-04-01',
+      verified: true
+    },
+    latitude: 1.3000,
+    longitude: 103.8000
   }
 ];

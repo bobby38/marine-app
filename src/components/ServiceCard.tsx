@@ -12,7 +12,17 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden transition-all hover:shadow-md">
-      <img src={service.image} alt={service.name} className="w-full h-48 object-cover" />
+      <img
+        src={service.image}
+        alt={service.name}
+        className="w-full h-48 object-cover"
+        onError={(e) => {
+          console.error('Image failed to load for service:', service.name, 'URL:', service.image);
+        }}
+        onLoad={() => {
+          console.log('Image loaded successfully for service:', service.name, 'URL:', service.image);
+        }}
+      />
       <div className="p-6">
         <h3 className="text-xl font-semibold mb-2 dark:text-white">{service.name}</h3>
         <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">{service.description}</p> {/* Added line-clamp */} 
