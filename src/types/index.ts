@@ -32,6 +32,8 @@ export interface MarineService {
     slots: string[];
   };
   provider?: Provider;
+  latitude?: number;  // Added latitude (optional)
+  longitude?: number; // Added longitude (optional)
 }
 
 export interface VesselDetails {

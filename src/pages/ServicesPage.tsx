@@ -1,11 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { MarineService } from '../types';
 import { ServiceCard } from '../components/ServiceCard';
 import { useNavigate } from 'react-router-dom';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css'; // Import Leaflet CSS
+import L from 'leaflet'; // Import L for custom icons
 
 interface ServicesPageProps {
   services: MarineService[];
 }
+
+// Custom blue SVG marker icon
+const bluePinSvg = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="#2563EB">
+  <path d="M12 0C8.13 0 5 3.13 5 7c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 4.5 12 4.5s2.5 1.12 2.5 2.5S13.38 9.5 12 9.5z"/>
+</svg>
+`;
+
+const customMarkerIcon = L.icon({
+    iconUrl: `data:image/svg+xml;base64,${btoa(bluePinSvg)}`,
+    iconSize: [28, 28], // size of the icon
+    iconAnchor: [14, 28], // point of the icon which will correspond to marker's location (bottom center)
+    popupAnchor: [0, -28] // point from which the popup should open relative to the iconAnchor
+});
 
 const ServicesPage: React.FC<ServicesPageProps> = ({ services }) => {
   const navigate = useNavigate();
@@ -16,6 +33,14 @@ const ServicesPage: React.FC<ServicesPageProps> = ({ services }) => {
   const filteredServices = selectedCategory === 'All'
     ? services
     : services.filter(service => service.category === selectedCategory);
+
+  // Filter services that have coordinates for the map
+  const servicesWithCoords = useMemo(() => {
+      return filteredServices.filter(service => service.latitude != null && service.longitude != null);
+  }, [filteredServices]);
+
+  // Default map center (Singapore)
+  const mapCenter: [number, number] = [1.3521, 103.8198]; 
 
   return (
     <div className="min-h-screen">
@@ -70,6 +95,38 @@ const ServicesPage: React.FC<ServicesPageProps> = ({ services }) => {
           </div>
         </div>
       </div>
+
+      {/* Map View - Conditionally render if services have coords */}
+      {servicesWithCoords.length > 0 && (
+        <div className="mb-8 h-96 w-full rounded-lg overflow-hidden shadow-lg relative"> 
+          <MapContainer 
+            center={mapCenter} 
+            zoom={11} 
+            scrollWheelZoom={false} 
+            style={{ height: "100%", width: "100%" }} 
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+              url="https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png"
+            />
+            {servicesWithCoords.map(service => (
+              <Marker 
+                key={service.id} 
+                position={[service.latitude!, service.longitude!]}
+                icon={customMarkerIcon} // Use the custom SVG icon
+              >
+                <Popup>
+                  <div className="text-sm">
+                    <h4 className="font-semibold">{service.name}</h4>
+                    <p>{service.category}</p>
+                    <p>Price: ${service.price.toFixed(2)}</p>
+                  </div>
+                </Popup>
+              </Marker>
+            ))}
+          </MapContainer>
+        </div>
+      )}
 
       {/* Services Grid Section - Restored background and dark text */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">

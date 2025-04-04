@@ -1,5 +1,6 @@
 import { MarineService } from '../types';
 
+// Sample data with approximate Singapore coordinates
 export const servicesData: MarineService[] = [
   {
     id: '1',
@@ -22,7 +23,9 @@ export const servicesData: MarineService[] = [
       totalServices: 128,
       joinedDate: '2023-01-15',
       verified: true
-    }
+    },
+    latitude: 1.2494, 
+    longitude: 103.8376
   },
   {
     id: '2',
@@ -45,7 +48,9 @@ export const servicesData: MarineService[] = [
       totalServices: 95,
       joinedDate: '2022-11-20',
       verified: true
-    }
+    },
+    latitude: 1.2786, 
+    longitude: 103.7586
   },
   {
     id: '3',
@@ -68,7 +73,9 @@ export const servicesData: MarineService[] = [
       totalServices: 72,
       joinedDate: '2023-03-10',
       verified: true
-    }
+    },
+    latitude: 1.2667, 
+    longitude: 103.8214
   },
   {
     id: '4',
@@ -91,7 +98,9 @@ export const servicesData: MarineService[] = [
       totalServices: 58,
       joinedDate: '2022-09-15',
       verified: true
-    }
+    },
+    latitude: 1.3880, 
+    longitude: 103.9888
   },
   {
     id: '5',
@@ -114,7 +123,9 @@ export const servicesData: MarineService[] = [
       totalServices: 102,
       joinedDate: '2023-02-01',
       verified: true
-    }
+    },
+    latitude: 1.3431, 
+    longitude: 103.6860
   },
   {
     id: '6',
@@ -137,6 +148,33 @@ export const servicesData: MarineService[] = [
       totalServices: 84,
       joinedDate: '2023-01-05',
       verified: true
-    }
+    },
+    latitude: 1.3061, 
+    longitude: 103.9303
+  },
+  {
+    id: '7',
+    name: 'Jet Ski Rental',
+    description: 'High-speed fun on the water near East Coast Park.',
+    price: 180,
+    duration: '2-3 hours',
+    image: '/images/jet_ski.jpg',
+    category: 'Rental',
+    averageRating: 4.4,
+    reviews: [],
+    availability: {
+      nextAvailable: 'Today',
+      slots: ['10:00 AM', '3:00 PM']
+    },
+    provider: {
+      id: 'p7',
+      name: 'Aqua Adventures',
+      rating: 4.4,
+      totalServices: 50,
+      joinedDate: '2022-06-01',
+      verified: true
+    },
+    latitude: 1.3061, 
+    longitude: 103.9303
   }
 ];
