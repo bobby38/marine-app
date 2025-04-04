@@ -53,6 +53,18 @@ const Header: React.FC = () => {
             Contact
           </Link>
           
+          {/* Demo Links */}
+          <Link to="/user/dashboard" className={`${isActive('/user/dashboard')} inline-flex items-center px-1 pt-1 text-sm font-medium border-l border-gray-300 dark:border-gray-600 ml-4 pl-4`}>
+            User Dash
+          </Link>
+          <Link to="/provider/dashboard" className={`${isActive('/provider/dashboard')} inline-flex items-center px-1 pt-1 text-sm font-medium`}>
+            Provider Dash
+          </Link>
+          <Link to="/admin/dashboard" className={`${isActive('/admin/dashboard')} inline-flex items-center px-1 pt-1 text-sm font-medium`}>
+            Admin Dash
+          </Link>
+          {/* End Demo Links */}
+          
           <button
             onClick={toggleTheme}
             className={`p-2 rounded-lg ${theme === 'dark' ? 'bg-gray-700 text-gray-400 hover:bg-gray-600' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
@@ -187,6 +199,33 @@ const Header: React.FC = () => {
               Contact
             </Link>
             
+            {/* Demo Links (Mobile) */}
+            <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-4">
+              <p className="px-3 text-sm font-medium text-gray-500 dark:text-gray-400">Demo Dashboards</p>
+            </div>
+            <Link
+              to="/user/dashboard"
+              onClick={toggleMobileMenu}
+              className={`${isActive('/user/dashboard')} px-3 py-2 rounded-md text-base font-medium`}
+            >
+              User Dashboard
+            </Link>
+            <Link
+              to="/provider/dashboard"
+              onClick={toggleMobileMenu}
+              className={`${isActive('/provider/dashboard')} px-3 py-2 rounded-md text-base font-medium`}
+            >
+              Provider Dashboard
+            </Link>
+             <Link
+              to="/admin/dashboard"
+              onClick={toggleMobileMenu}
+              className={`${isActive('/admin/dashboard')} px-3 py-2 rounded-md text-base font-medium`}
+            >
+              Admin Dashboard
+            </Link>
+            {/* End Demo Links (Mobile) */}
+
             {isAuthenticated ? (
               <>
                 <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
